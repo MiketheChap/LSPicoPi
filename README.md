@@ -1,5 +1,6 @@
 # LSPicoPi
 This is a revision of LightShowPi (https://bitbucket.org/togiles/lightshowpi/), software designed for the Raspberry Pi Pico microcontroller. Hopefully, it will require fewer dependencies than LightSHowPi and the Raspberry Pi.
+For initial sampling I used the song Sleigh Ride by Leonard Bernstein and the Boston Pops. 
 
 Given this prompt, Claude provided the following framework:
 "If i wanted to create a box that would take songs in mp3 format, use ffmpeg to create and save a file reflecting a spectrum of 8 frequencies. When turned on, the circuit would trigger relays corresponding to 8 strands/channels of conventional leds. It would randomize playback of the songs."
