@@ -137,11 +137,13 @@ void loop() {
 """
 
 Claude created and I tested the following on my Ubuntu system: 
-1. Set up a location for your virtual environment where you will do song analysis, test, and create your JSON or other related files, then open that folder.
+1. From your terminal install FFMPEG
+**sudo apt-get install ffmpeg**
+2. Set up a location for your virtual environment where you will do song analysis, test, and create your JSON or other related files, then open that folder.
 **cd /home/study/projects/mp3_analysis
 python3 -m venv venv
 source venv/bin/activate**
-2. Install numpy
+3. Install numpy
 **pip install numpy matplotlib scipy pydub**
-3. Create the following files:
+4. Create the following files:
 
