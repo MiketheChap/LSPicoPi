@@ -147,3 +147,70 @@ source venv/bin/activate**
 **pip install numpy matplotlib scipy pydub**
 4. Create the following files:
 
+#### 2024-10-06 updates 
+I got the Pico working (after having to be schooled in Circuit Python and Thonny). 
+
+I could upload the provided main.py and minimal_test.lshow onto my Pico (and it's breakout board) and get it to run. **However**, the lshow file (combining music and FFMPG json data) was way too big to be able to load onto the Pico. So, it looks like I'll need to connect a MicroSD card. 
+
+Below is my conversation with Claude.ai without whom I could not do this.   
+
+You've raised some excellent points that get to the heart of system design for your LightShowPi replacement. Let's break this down:
+
+1. MicroSD processing capability:
+MicroSD cards are certainly capable of streaming the data at the rates you'd need for this application. Even basic Class 4 SD cards can manage 4MB/s read speeds, which is more than enough for your LED control data and audio playback.
+
+2. Raspberry Pi Pico capabilities:
+The Pico, while powerful for its size and cost, is indeed less capable than a full Raspberry Pi. Here's a breakdown of what it can likely handle:
+
+   a) LED control: This is well within the Pico's capabilities. Managing 8 LED channels at typical update rates (e.g., 50-100 Hz) is not computationally intensive.
+
+   b) Audio playback: This is where things get tricky. The Pico doesn't have built-in audio output capabilities like the Raspberry Pi. It can generate audio signals, but you'd need additional hardware (like a DAC) to produce high-quality audio. 
+
+3. Desktop preprocessing approach:
+Your idea of doing the heavy lifting on a desktop and having the Pico handle playback is a smart one. It aligns well with the Pico's strengths and mitigates its limitations. Here's how this could work:
+
+
+
+```mermaid
+graph TD
+    A[Desktop Computer] -->|Preprocess audio & generate LED data| B[lshow file]
+    B -->|Transfer to| C[MicroSD Card]
+    C -->|Insert into| D[SD Card Reader]
+    D -->|Connected to| E[Raspberry Pi Pico]
+    E -->|Control| F[LED Strips]
+    E -->|Digital Audio| G[I2S DAC]
+    G -->|Analog Audio| H[Amplifier & Speakers]
+
+```
+
+Here's a breakdown of this architecture:
+
+1. Desktop Preprocessing:
+   - Analyze the audio file and generate LED control data.
+   - Package this data along with the audio into your lshow format.
+   - This offloads the computationally intensive work from the Pico.
+
+2. Data Transfer:
+   - Store the lshow file on a MicroSD card.
+   - The Pico reads from this card during playback.
+
+3. Pico Playback:
+   - The Pico reads the lshow file from the SD card.
+   - It sends control signals to the LEDs based on the preprocessed data.
+   - For audio, it streams the digital audio data to an external DAC.
+
+4. Audio Output:
+   - Use an I2S DAC (Digital-to-Analog Converter) connected to the Pico.
+   - The Pico streams digital audio data to the DAC, which converts it to analog.
+   - The analog signal goes to an amplifier and then to speakers.
+
+This setup is indeed possible and plays to the strengths of both your desktop system and the Pico. The desktop handles the complex processing, while the Pico manages real-time playback of the preprocessed data.
+
+To implement this, you'd need to:
+1. Modify your desktop software to output the lshow files in a format optimized for the Pico's playback.
+2. Develop Pico firmware that can read the lshow files and control both LEDs and audio output.
+3. Set up the hardware: Pico, SD card reader, I2S DAC, LED controllers, and audio amplifier.
+
+This approach gives you the best of both worlds: the processing power of a desktop for the complex tasks, and the real-time capabilities and simplicity of the Pico for playback. It also makes your system more maintainable, as most updates would happen on the desktop software, with the Pico firmware remaining relatively stable.
+
+Would you like me to elaborate on any part of this system design or provide some example code for the Pico side of things?
