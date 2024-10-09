@@ -1,0 +1,33 @@
+# Programming Environment for Teensy
+
+## Language: C++
+- Teensy is programmed primarily in C++, not Python
+- Uses Arduino-style C++ with some Teensy-specific extensions
+
+## Development Environment
+1. Arduino IDE
+   - Most common choice
+   - Requires Teensyduino add-on
+
+2. PlatformIO
+   - More advanced IDE, popular for larger projects
+   - Supports Teensy out of the box
+
+3. Visual Studio Code
+   - Can be used with PlatformIO extension
+
+## Key Differences from Python
+- Statically typed (vs Python's dynamic typing)
+- Compiled (not interpreted like Python)
+- More verbose syntax
+- Direct hardware access
+- Potentially faster execution
+
+## Learning Curve
+- Steeper than Python for beginners
+- Familiar to those with C/C++ or Arduino experience
+
+## Benefits for Audio-Visual Projects
+- Fine-grained control over hardware
+- Efficient execution, crucial for real-time audio and LED control
+- Rich ecosystem of C++ libraries for audio and LED manipulation
