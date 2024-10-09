@@ -1,4 +1,5 @@
-# LSPicoPi
+### LSPicoPi
+#### Concept History
 This is a revision of LightShowPi (https://bitbucket.org/togiles/lightshowpi/), software designed for the Raspberry Pi Pico microcontroller. Hopefully, it will require fewer dependencies than LightSHowPi and the Raspberry Pi.
 For initial sampling I used the song Sleigh Ride by Leonard Bernstein and the Boston Pops. 
 
@@ -135,7 +136,6 @@ void loop() {
   }
 }
 """
-
 Claude created and I tested the following on my Ubuntu system: 
 1. From your terminal install FFMPEG
 **sudo apt-get install ffmpeg**
@@ -147,7 +147,83 @@ source venv/bin/activate**
 **pip install numpy matplotlib scipy pydub**
 4. Create the following files:
 
-#### 2024-10-06 updates 
+#### History (in Ascending Order)
+I asked Claude.ai if there would be a benefit to using a Teensy versus a Pico.
+_Another question: Would it be easier/better to use a PJRC Teensy? I think it has a MicroSD card built in. As well, it may have more memory. Plus, it has some dedicated audio hardware, if I'm reading correctly._ 
+
+Claude reply: 
+_PJRC Teensy vs Raspberry Pi Pico for Audio-Visual Projects
+**Teensy 4.1 Advantages**
+
+**Processing Power:**
+600 MHz ARM Cortex-M7 processor (much faster than Pico's 133 MHz dual-core ARM Cortex-M0+)
+Better suited for real-time audio processing and complex LED control
+
+
+**Memory:**
+
+1MB RAM (vs Pico's 264KB)
+8MB Flash (vs Pico's 2MB)
+Allows for more complex programs and larger audio buffers
+
+
+**Audio Capabilities:**
+
+- Dedicated audio hardware
+- Support for high-quality audio playback without additional components
+- Audio library with advanced features (effects, mixing, etc.)
+
+
+**MicroSD Support:**
+
+- Built-in MicroSD card slot (Teensy 4.1)
+- Easier integration without additional modules
+
+
+**LED Control:**
+
+- OctoWS2811 library for controlling multiple LED strips simultaneously
+
+**Development Environment:**
+
+- Works with Arduino IDE (familiar to many hobbyists)
+- Extensive libraries for various functionalities
+
+
+**Raspberry Pi Pico Advantages**
+
+**Cost:**
+
+Generally less expensive than Teensy
+
+
+**GPIO:**
+
+More GPIO pins available
+
+
+**Dual-core:**
+
+Allows for parallel processing (though Teensy is still more powerful)
+
+
+**Community and Documentation:**
+
+Larger community and more extensive documentation
+
+
+
+**Conclusion**
+For audio-visual projects, especially those involving high-quality audio
+and complex LED control, the Teensy 4.1 offers significant advantages
+in terms of processing power, memory, and dedicated audio hardware.
+It's likely to provide a smoother development experience and better
+performance for your light show project._
+
+
+
+
+##### 2024-10-06 updates 
 I got the Pico working (after having to be schooled in Circuit Python and Thonny). 
 
 I could upload the provided main.py and minimal_test.lshow onto my Pico (and it's breakout board) and get it to run. **However**, the lshow file (combining music and FFMPG json data) was way too big to be able to load onto the Pico. So, it looks like I'll need to connect a MicroSD card. 
